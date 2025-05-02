@@ -25,15 +25,6 @@ RUN apk add --update --virtual .deps --no-cache gnupg && \
     rm -f /tmp/hcp_0.4.0_linux_amd64.zip hcp_0.4.0_SHA256SUMS 0.4.0/hcp_0.4.0_SHA256SUMS.sig && \
     apk del .deps
 
-RUN apt-get update && apt-get install -y curl
-
-RUN mkdir -p /tmp/hcp && curl -SLO https://releases.hashicorp.com/hcp/0.12.3/hcp_linux_amd64.zip \
-    && unzip -d /tmp/hcp hcp_linux_amd64.zip
-
-RUN mkdir -p /usr/local/bin && cp /tmp/hcp/hcp /usr/local/bin/
-
-RUN chmod +x /usr/local/bin/hcp
-
 WORKDIR /app
 
 COPY . /app/
