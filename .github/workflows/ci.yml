@@ -50,28 +50,28 @@ jobs:
         run: docker login registry.heroku.com -u ${{secrets.HEROKU_REGISTRY_USERNAME}} --password ${{secrets.HEROKU_REGISTRY_PASSWORD}}
 
       - name: Build platform image
-        run: docker build -t ghcr.io/ashutoshspunyani99-tamu/VitalVault:${{github.sha}} --target platform .
+        run: docker build -t ghcr.io/ashutoshspunyani99-tamu/vitalvault:${{github.sha}} --target platform .
 
       - name: Push platform image to ghcr.io
-        run: docker push ghcr.io/ashutoshspunyani99-tamu/VitalVault:${{github.sha}}
+        run: docker push ghcr.io/ashutoshspunyani99-tamu/vitalvault:${{github.sha}}
 
       # - name: Notify Render for platform deploy
-      #   run: curl -G --data-urlencode "imgURL=ghcr.io/ashutoshspunyani99-tamu/VitalVault:${{github.sha}}"  ${{secrets.RENDER_DEPLOY_HOOK_URL}}
+      #   run: curl -G --data-urlencode "imgURL=ghcr.io/ashutoshspunyani99-tamu/vitalvault:${{github.sha}}"  ${{secrets.RENDER_DEPLOY_HOOK_URL}}
 
       - name: Build upload image
-        run: docker build -t ghcr.io/ashutoshspunyani99-tamu/VitalVault-upload:${{github.sha}} --target upload .
+        run: docker build -t ghcr.io/ashutoshspunyani99-tamu/vitalvault-upload:${{github.sha}} --target upload .
 
       - name: Push upload image to ghcr.io
-        run: docker push ghcr.io/ashutoshspunyani99-tamu/VitalVault-upload:${{github.sha}}
+        run: docker push ghcr.io/ashutoshspunyani99-tamu/vitalvault-upload:${{github.sha}}
 
       # - name: Notify Render for upload deploy
-      #   run: curl -G --data-urlencode "imgURL=ghcr.io/ashutoshspunyani99-tamu/VitalVault-upload:${{github.sha}}"  ${{secrets.RENDER_UPLOAD_DEPLOY_HOOK_URL}}
+      #   run: curl -G --data-urlencode "imgURL=ghcr.io/ashutoshspunyani99-tamu/vitalvault-upload:${{github.sha}}"  ${{secrets.RENDER_UPLOAD_DEPLOY_HOOK_URL}}
 
       - name: Tag platform image to heroku
-        run: docker tag ghcr.io/ashutoshspunyani99-tamu/VitalVault:${{github.sha}} registry.heroku.com/vitalvault-platform/web
+        run: docker tag ghcr.io/ashutoshspunyani99-tamu/vitalvault:${{github.sha}} registry.heroku.com/vitalvault-platform/web
 
       - name: Tag upload image to heroku
-        run: docker tag ghcr.io/ashutoshspunyani99-tamu/VitalVault-upload:${{github.sha}} registry.heroku.com/vitalvault-upload/web
+        run: docker tag ghcr.io/ashutoshspunyani99-tamu/vitalvault-upload:${{github.sha}} registry.heroku.com/vitalvault-upload/web
 
       - name: Push upload image to heroku
         run: docker push registry.heroku.com/vitalvault-upload/web
