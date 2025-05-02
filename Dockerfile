@@ -12,18 +12,18 @@ ENV PATH="$PNPM_HOME:$PATH"
 
 ENV NODE_ENV=production
 
-RUN apk add --update --virtual .deps --no-cache gnupg && \
-    cd /tmp && \
-    wget https://releases.hashicorp.com/hcp/0.4.0/hcp_0.4.0_linux_amd64.zip && \
-    wget https://releases.hashicorp.com/hcp/0.4.0/hcp_0.4.0_SHA256SUMS && \
-    wget https://releases.hashicorp.com/hcp/0.4.0/hcp_0.4.0_SHA256SUMS.sig && \
-    wget -qO- https://www.hashicorp.com/.well-known/pgp-key.txt | gpg --import && \
-    gpg --verify hcp_0.4.0_SHA256SUMS.sig hcp_0.4.0_SHA256SUMS && \
-    grep hcp_0.4.0_linux_amd64.zip hcp_0.4.0_SHA256SUMS | sha256sum -c && \
-    unzip /tmp/hcp_0.4.0_linux_amd64.zip -d /tmp && \
-    mv /tmp/hcp /usr/local/bin/hcp && \
-    rm -f /tmp/hcp_0.4.0_linux_amd64.zip hcp_0.4.0_SHA256SUMS 0.4.0/hcp_0.4.0_SHA256SUMS.sig && \
-    apk del .deps
+# RUN apk add --update --virtual .deps --no-cache gnupg && \
+#     cd /tmp && \
+#     wget https://releases.hashicorp.com/hcp/0.4.0/hcp_0.4.0_linux_amd64.zip && \
+#     wget https://releases.hashicorp.com/hcp/0.4.0/hcp_0.4.0_SHA256SUMS && \
+#     wget https://releases.hashicorp.com/hcp/0.4.0/hcp_0.4.0_SHA256SUMS.sig && \
+#     wget -qO- https://www.hashicorp.com/.well-known/pgp-key.txt | gpg --import && \
+#     gpg --verify hcp_0.4.0_SHA256SUMS.sig hcp_0.4.0_SHA256SUMS && \
+#     grep hcp_0.4.0_linux_amd64.zip hcp_0.4.0_SHA256SUMS | sha256sum -c && \
+#     unzip /tmp/hcp_0.4.0_linux_amd64.zip -d /tmp && \
+#     mv /tmp/hcp /usr/local/bin/hcp && \
+#     rm -f /tmp/hcp_0.4.0_linux_amd64.zip hcp_0.4.0_SHA256SUMS 0.4.0/hcp_0.4.0_SHA256SUMS.sig && \
+#     apk del .deps
 
 WORKDIR /app
 
