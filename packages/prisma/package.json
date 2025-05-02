@@ -1,0 +1,30 @@
+{
+  "name": "@vital_vault/prisma",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "ashutoshspunyani99-tamu <ashutoshspunyani99@tamu.edu>",
+  "homepage": "https://github.com/ashutoshspunyani99-tamu/VitalVault#readme",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashutoshspunyani99-tamu/VitalVault.git"
+  },
+  "scripts": {
+    "generate": "prisma generate",
+    "migrate:dev": "hcp vault-secrets run --app=vitalVaultSecretVault -- prisma migrate dev --name init"
+  },
+  "bugs": {
+    "url": "https://github.com/ashutoshspunyani99-tamu/VitalVault/issues"
+  },
+  "dependencies": {
+    "@pothos/plugin-prisma": "^3.65.3",
+    "@prisma/client": "^5.16.1",
+    "prisma": "^5.16.1"
+  }
+}

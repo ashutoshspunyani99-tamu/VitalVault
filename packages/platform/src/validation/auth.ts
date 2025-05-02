@@ -1,0 +1,62 @@
+import { CustomContext } from '../builder'
+import { verifyAuthToken } from '../privy'
+import { prisma } from '../prisma'
+import { parseUCAN, verifyUCAN } from '../ucan'
+import { UserRole } from '@vital_vault/prisma'
+
+export const fetchPrivyDidFromAuth = (authToken: string) =>
+  verifyAuthToken(authToken)
+    .then((payload) => payload.userId)
+    .catch(() => null)
+
+const verifyToken = async (token: string): Promise<Partial<CustomContext> | null> => {
+  try {
+    const res = await verifyUCAN({
+      token,
+      capability: {
+        with: { scheme: 'fs', hierPart: `//filebase` },
+        can: { namespace: 'filebase', segments: ['OPEN'] }
+      }
+    })
+    if (!res) return null
+
+    const parsedValue = parseUCAN(token)
+
+    return { ...parsedValue.payload.fct?.[0], isPrivyAuth: false, authToken: token }
+  } catch (error) {
+    console.error('Error verifying token:', error)
+    return null
+  }
+}
+
+export const extractContext = async (headers: Headers): Promise<Partial<CustomContext>> => {
+  try {
+    console.log('extractContext', headers.get('authorization'))
+    const authToken = headers.get('authorization')?.replace('Bearer ', '') ?? ''
+    const ctx = await verifyToken(authToken)
+    console.log('ctx', ctx)
+    if (ctx) return ctx
+    const privyDid = await fetchPrivyDidFromAuth(authToken)
+    console.log(privyDid)
+    if (!privyDid) return {}
+    const user = await prisma.user.findFirst({
+      where: {
+        privyDid
+      }
+    })
+    return { isPrivyAuth: true, authToken, userId: user?.id, privyDid }
+  } catch (error) {
+    return {}
+  }
+}
+
+export const hasRole = ({ role, ctx }: { role: UserRole; ctx: CustomContext }) =>
+  prisma.user
+    .findUniqueOrThrow({
+      where: {
+        id: ctx.userId,
+        role
+      }
+    })
+    .then(() => true)
+    .catch(() => false)

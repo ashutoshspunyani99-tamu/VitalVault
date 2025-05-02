@@ -1,0 +1,46 @@
+{
+  "name": "@vital_vault/web",
+  "version": "0.1.0",
+  "author": "ashup99 <ashutoshpunyani99@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashutoshspunyani99-tamu/VitalVault.git"
+  },
+  "homepage": "https://github.com/ashutoshspunyani99-tamu/VitalVault#readme",
+  "scripts": {
+    "dev": "cross-env PORT=3001 next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.10.8",
+    "@heroicons/react": "^2.1.4",
+    "@privy-io/react-auth": "^1.73.2",
+    "@reduxjs/toolkit": "^2.2.6",
+    "@tailwindcss/typography": "^0.5.13",
+    "dotenv": "^16.4.5",
+    "graphql": "^16.9.0",
+    "next": "14.2.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-redux": "^9.1.2",
+    "react-toastify": "^10.0.5",
+    "theme-change": "^2.5.0"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.19",
+    "cross-env": "^7.0.3",
+    "daisyui": "^4.12.10",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
