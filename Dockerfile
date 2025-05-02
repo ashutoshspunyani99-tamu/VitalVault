@@ -1,4 +1,4 @@
-FROM node:20.17.0 as base
+FROM node:22 as base
 
 LABEL org.opencontainers.image.source=https://github.com/ashutoshspunyani99-tamu/VitalVault
 
