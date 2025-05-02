@@ -18,7 +18,8 @@
     "build": "esbuild src/server.ts --bundle --platform=node --target=node20 --format=esm --packages=external --outdir=dist",
     "build:dev": "tsc",
     "dev": "hcp vault-secrets run --app=vitalVaultSecretVault -- tsx watch src/server.ts",
-    "start": "hcp vault-secrets run --app=vitalVaultSecretVault -- node ./dist/server.js"
+    "dev:heroku": "hcp vault-secrets run --app=vitalVaultSecretVault -- tsx watch src/server.ts",
+    "start": "node ./dist/server.js"
   },
   "bugs": {
     "url": "https://github.com/ashutoshspunyani99-tamu/VitalVault/issues"

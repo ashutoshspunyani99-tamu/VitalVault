@@ -17,7 +17,7 @@
   },
   "scripts": {
     "generate": "prisma generate",
-    "migrate:dev": "hcp vault-secrets run --app=vitalVaultSecretVault -- prisma migrate dev --name init"
+    "migrate:dev": "prisma migrate dev --name init"
   },
   "bugs": {
     "url": "https://github.com/ashutoshspunyani99-tamu/VitalVault/issues"
