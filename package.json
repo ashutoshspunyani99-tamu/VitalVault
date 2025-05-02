@@ -18,7 +18,7 @@
     "tsx": "^4.16.2"
   },
   "scripts": {
-    "start": "lerna run dev --stream",
+    "start": "lerna run dev:heroku --stream",
     "lint": "eslint .",
     "format": "prettier --check \"./**/*.{ts,js,tsx,md}\"",
     "format:fix": "prettier --write \"./**/*.{ts,js,tsx,md}\"",
