@@ -40,6 +40,9 @@ jobs:
       packages: write
       contents: read
     steps:
+      - name: Install Heroku CLI
+        run:  curl https://cli-assets.heroku.com/install.sh | sh
+        
       - name: Clone the repository
         uses: actions/checkout@v4
 
