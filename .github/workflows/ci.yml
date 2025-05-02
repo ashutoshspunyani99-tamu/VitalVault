@@ -54,6 +54,9 @@ jobs:
 
       - name: Build platform image
         run: docker build -t ghcr.io/ashutoshspunyani99-tamu/vitalvault:${{github.sha}} --target platform .
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
       - name: Push platform image to ghcr.io
         run: docker push ghcr.io/ashutoshspunyani99-tamu/vitalvault:${{github.sha}}
