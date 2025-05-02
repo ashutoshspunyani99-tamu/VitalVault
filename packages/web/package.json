@@ -10,6 +10,7 @@
   "homepage": "https://github.com/ashutoshspunyani99-tamu/VitalVault#readme",
   "scripts": {
     "dev": "cross-env PORT=3001 next dev",
+    "dev:heroku": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
