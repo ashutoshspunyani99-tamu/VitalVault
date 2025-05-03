@@ -8,10 +8,13 @@ const PrivyProvider = dynamic(() => import('@privy-io/react-auth').then((mod) =>
 
 export default function PrivyProviderWrapper({ children }: { children: ReactNode }) {
   const appId = process.env.NEXT_PUBLIC_PRIVY_APP_ID
+  const clientId = process.env.NEXT_PUBLIC_PRIVY_CLIENT_ID
   return (
+    clientId &&
     appId && (
       <PrivyProvider
         appId={appId}
+        clientId={clientId}
         config={{
           appearance: {
             showWalletLoginFirst: false
