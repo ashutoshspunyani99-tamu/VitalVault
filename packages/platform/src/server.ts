@@ -12,5 +12,5 @@ const yoga = createYoga({
 const server = createServer(yoga)
 
 server.listen(PORT, () => {
-  console.log(`Server started listening on port ${PORT}`)
+  console.info(`Server started listening on port ${PORT}`)
 })

@@ -80,7 +80,6 @@ function ShareDocuments({ params }: { params: { id: string } }) {
     dispatch(() => {
       const docsData = listShareTokensData?.listShareTokens
       if (docsData) {
-        console.log({ docsData })
         setShareTokenList(docsData)
       }
     })
@@ -91,7 +90,6 @@ function ShareDocuments({ params }: { params: { id: string } }) {
     setErrorMessage('')
     await createShareTokenGql({ variables: { fileId, ttl: 3600 * 5 } })
       .then(async (result) => {
-        console.log({ result })
         setSuccessMessage('Token created successfully')
         await listShareTokensRefetch()
       })
@@ -106,7 +104,6 @@ function ShareDocuments({ params }: { params: { id: string } }) {
     setErrorMessage('')
     await revokeShareTokenGql({ variables: { tokenId } })
       .then(async (result) => {
-        console.log({ result })
         setSuccessMessage('Token deleted successfully')
         await listShareTokensRefetch()
       })

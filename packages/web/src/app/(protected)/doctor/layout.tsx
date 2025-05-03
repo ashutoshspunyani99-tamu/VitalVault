@@ -31,7 +31,7 @@ export default function ProtectedLayout({ children, params }: LayoutProps) {
   }
 
   if (!isAuthenticated) {
-    return null
+    return <div>Redirecting...</div>
   }
 
   return (

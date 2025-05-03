@@ -18,7 +18,6 @@ builder.mutationField('createAuthToken', (t) =>
       role: t.arg({ type: UserRoleEnum })
     },
     resolve: async (query, root, { role }, ctx) => {
-      console.log('createAuthToken', { role, ctx })
       let user = await prisma.user.findFirst({
         where: {
           privyDid: ctx.privyDid

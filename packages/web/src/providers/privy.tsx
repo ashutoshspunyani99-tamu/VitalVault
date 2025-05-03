@@ -1,47 +1,25 @@
 'use client'
 
-import { PrivyProvider } from '@privy-io/react-auth'
 import dynamic from 'next/dynamic'
+import { ReactNode } from 'react'
 
-// export default PrivyProviderWrapper
-// import { PrivyProvider } from '@privy-io/react-auth'
-// import { useRouter } from 'next/router'
+// Dynamic import with SSR disabled
+const PrivyProvider = dynamic(() => import('@privy-io/react-auth').then((mod) => mod.PrivyProvider), { ssr: false })
 
-// export default function PrivyProviderWrapper({ children }: { children: React.ReactNode }) {
-//   // const appId = process.env.PRIVY_APP_ID
-
-//   //   const router = useRouter()
-//   return (
-//     <PrivyProvider
-//       appId="cma6lio7o01lnjo0nwfxivisi"
-//       config={{
-//         appearance: {
-//           showWalletLoginFirst: false
-//         }
-//       }}
-//     >
-//       {children}
-//     </PrivyProvider>
-//   )
-// }
-
-const PrivyProviderWrapper = dynamic(
-  () =>
-    Promise.resolve(function PrivyProviderWrapper({ children }: { children: React.ReactNode }) {
-      return (
-        <PrivyProvider
-          appId="cma6lio7o01lnjo0nwfxivisi"
-          config={{
-            appearance: {
-              showWalletLoginFirst: false
-            }
-          }}
-        >
-          {children}
-        </PrivyProvider>
-      )
-    }),
-  { ssr: false }
-)
-
-export default PrivyProviderWrapper
+export default function PrivyProviderWrapper({ children }: { children: ReactNode }) {
+  const appId = process.env.NEXT_PUBLIC_PRIVY_APP_ID
+  return (
+    appId && (
+      <PrivyProvider
+        appId={appId}
+        config={{
+          appearance: {
+            showWalletLoginFirst: false
+          }
+        }}
+      >
+        {children}
+      </PrivyProvider>
+    )
+  )
+}

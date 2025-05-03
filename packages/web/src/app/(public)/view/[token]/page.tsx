@@ -39,7 +39,6 @@ function ShareDocuments({ params }: { params: { token: string } }) {
   useEffect(() => {
     dispatch(() => {
       const base64 = viewSharedFileBlobData?.viewSharedFileBlob
-      console.log({ base64 })
       if (base64) {
         setFileBase64(base64)
       }

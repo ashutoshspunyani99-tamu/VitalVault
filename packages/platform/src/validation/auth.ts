@@ -31,13 +31,10 @@ const verifyToken = async (token: string): Promise<Partial<CustomContext> | null
 
 export const extractContext = async (headers: Headers): Promise<Partial<CustomContext>> => {
   try {
-    console.log('extractContext', headers.get('authorization'))
     const authToken = headers.get('authorization')?.replace('Bearer ', '') ?? ''
     const ctx = await verifyToken(authToken)
-    console.log('ctx', ctx)
     if (ctx) return ctx
     const privyDid = await fetchPrivyDidFromAuth(authToken)
-    console.log(privyDid)
     if (!privyDid) return {}
     const user = await prisma.user.findFirst({
       where: {

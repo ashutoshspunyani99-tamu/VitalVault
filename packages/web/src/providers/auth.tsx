@@ -20,11 +20,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { authenticated } = usePrivy()
 
   const clearData = async () => {
-    console.log('Successfully logged out')
+    console.info('Successfully logged out')
     localStorage.clear()
-    console.log('Token cleared')
+    console.info('Token cleared')
     await auth.logout()
-    console.log('Cookie cleared')
+    console.info('Cookie cleared')
     checkAuth()
     router.push('/')
   }
@@ -46,7 +46,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    console.log('hello Auth Provider')
     checkAuth()
   }, [checkAuth])
 
@@ -59,7 +58,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   )
 
   const authLogout = useCallback(async () => {
-    console.log('Before')
     try {
       if (authenticated) {
         await logout()

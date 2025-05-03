@@ -65,7 +65,6 @@ function Documents() {
   useEffect(() => {
     const docsData = patientsListData?.fetchPatients
     if (docsData) {
-      console.log({ docsData })
       setPatientsList(docsData)
     }
   }, [patientsListData])
@@ -75,7 +74,6 @@ function Documents() {
       const filteredPatient = patientsList.filter((ele) => {
         return selectedPatientId == ele.id
       })
-      console.log({ filteredPatient })
       if (filteredPatient[0]) {
         setSelectedPatient(filteredPatient[0])
       } else {
@@ -85,23 +83,17 @@ function Documents() {
   }, [selectedPatientId])
 
   const onPatientChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.target.value)
     setSelectedPatientId(event.target.value)
   }
 
   const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileData = event?.target?.files
-    console.log({ fileData })
     if (fileData && fileData?.length > 0) {
       currentFileUploadData = fileData[0]
-      console.log('AS', fileData[0])
-      console.log('AS', typeof fileData[0])
-      console.log('AS', { currentFileUploadData })
     }
   }
 
   const uploadFileModal = () => {
-    console.log('Hello OOOO')
     dispatch(() => {
       dispatch(
         openModal({
@@ -140,7 +132,6 @@ function Documents() {
   }
 
   const updateUploadModal = (responseData: JSX.Element) => {
-    console.log({ responseData })
     dispatch(
       updateModal({
         response: responseData
@@ -151,8 +142,6 @@ function Documents() {
   const uploadFileDocument = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setUploadLoading(true)
-    console.log('uploadFileDocument Hello world')
-    console.log({ currentFileUploadData, selectedPatientId })
     if (!currentFileUploadData) {
       updateUploadModal(
         <>
@@ -177,7 +166,6 @@ function Documents() {
               method: 'POST'
             })
               .then((uploadRes) => {
-                console.log({ uploadRes })
                 if (uploadRes.status === 200) {
                   updateUploadModal(
                     <>
@@ -194,7 +182,7 @@ function Documents() {
                 }
               })
               .catch((uploadError) => {
-                console.log({ uploadError })
+                console.error({ uploadError })
                 updateUploadModal(
                   <>
                     <ErrorText styleClass="mt-8">{JSON.stringify(uploadError, null, 2)}</ErrorText>

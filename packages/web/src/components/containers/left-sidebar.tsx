@@ -25,8 +25,6 @@ function LeftSidebar(props: LeftSidebarProps) {
   } else {
     routes = routesObj.doctorRoutes
   }
-  console.log({ roleUrl })
-  // console.log('props.userRole', props.userRole)
 
   const close = () => {
     const leftSidebarDrawer = document.getElementById('left-sidebar-drawer')
@@ -34,7 +32,6 @@ function LeftSidebar(props: LeftSidebarProps) {
   }
 
   useEffect(() => {
-    console.log(pathname)
     let routeObj = routes.filter((r) => {
       return r.path == pathname
     })[0]

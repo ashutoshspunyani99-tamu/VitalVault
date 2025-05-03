@@ -59,7 +59,6 @@ function Documents() {
     dispatch(() => {
       const docsData = patientFilesData?.fetchPatientFiles
       if (docsData) {
-        console.log({ docsData })
         setDocumentsData(docsData)
       }
     })
@@ -67,7 +66,6 @@ function Documents() {
 
   useEffect(() => {
     dispatch(() => {
-      console.log({ patientFilesBlobData })
       if (patientFilesBlobData) {
         dispatch(
           openModal({
@@ -92,14 +90,10 @@ function Documents() {
   }, [patientFilesBlobData])
 
   const openCurrentDocument = (index: number) => {
-    console.log(documentsData[index])
-    console.log(documentsData[index].id)
     setSelectedFileId(documentsData[index].id)
-    console.log({ selectedFileId })
   }
 
   const updateUploadModal = (responseData: JSX.Element) => {
-    console.log({ responseData })
     dispatch(
       updateModal({
         response: responseData

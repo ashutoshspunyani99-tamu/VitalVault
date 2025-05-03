@@ -36,40 +36,30 @@ const LoginPage = (): JSX.Element => {
   })
 
   const readyAndNoAuthentication = () => {
-    console.log({ ready, authenticated, isLoading })
     if (ready) {
       if (!authenticated) {
         setIsLoading(false)
-        console.log('take')
-        console.log({ ready, authenticated, isLoading })
       }
     }
   }
 
   useEffect(() => {
-    console.log('hello world')
     authLogout()
   }, [])
 
   useEffect(() => {
-    console.log('hello world')
     readyAndNoAuthentication()
   }, [ready, authenticated])
 
   const handleRegister = async () => {
-    console.log('hello world handleRegister')
-    console.log({ ready, authenticated, isLoading })
     const role = isPatient ? USER_ROLES.Patient : USER_ROLES.Doctor
     await registerUser({ variables: { role } })
       .then(async (result) => {
-        console.log('hello world handleRegister 2')
-        console.log({ result })
         localStorage.setItem(APP_NAME + ':token', result?.data?.createAuthToken?.authToken)
         localStorage.setItem(APP_NAME + ':refreshToken', result?.data?.createAuthToken?.refreshToken)
         const roleUrl = (result?.data?.createAuthToken?.user?.role as string).toLowerCase()
         localStorage.setItem(USER_ROLE, roleUrl)
         await authLogin(result?.data?.createAuthToken?.authToken)
-        console.log('hello world handleRegister 2 authlogin done')
         setIsLoading(false)
         const loginRolePatient = roleUrl == USER_ROLES.Patient.toLowerCase()
         if (loginRolePatient) router.push('/patient/documents')
@@ -88,9 +78,7 @@ const LoginPage = (): JSX.Element => {
 
   const { login } = useLogin({
     onComplete: async (user, isNewUser, wasAlreadyAuthenticated, loginMethod, linkedAccount) => {
-      console.log('hello worldsdsd')
       setIsLoading(true)
-      console.log({ user, isNewUser, wasAlreadyAuthenticated, loginMethod, linkedAccount })
       const accessToken = await getAccessToken()
       if (accessToken) localStorage.setItem(PRIVY_APP_NAME + ':token', accessToken)
       handleRegister()

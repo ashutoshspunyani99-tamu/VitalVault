@@ -24,7 +24,6 @@ function Header({ contentRef }: HeaderProps): JSX.Element {
   }, [pageTitle])
 
   const logoutUser = async () => {
-    console.log('here')
     await authLogout()
   }
 

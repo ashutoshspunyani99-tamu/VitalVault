@@ -43,7 +43,6 @@ const PatientDashboard = () => {
     setErrorMessage('')
     await addPatient({ variables: { patientId: selectedPatientId } })
       .then(async (result) => {
-        console.log({ result })
         setSuccessMessage('Patient Added successfully!')
       })
       .catch((error) => {
@@ -55,7 +54,6 @@ const PatientDashboard = () => {
   }
 
   const onPatientChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.target.value)
     setSelectedPatientId(event.target.value)
   }
 
@@ -66,7 +64,6 @@ const PatientDashboard = () => {
   useEffect(() => {
     const docsData = patientsListData?.fetchAllPatients
     if (docsData) {
-      console.log({ docsData })
       setPatientsList(docsData)
     }
   }, [patientsListData])

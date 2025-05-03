@@ -52,9 +52,9 @@ fastify.post('/upload', async (req, res) => {
   })
   return res.status(200).send({ success: true })
 })
-console.log('UPLOAD PORT', PORT)
+console.info('UPLOAD PORT', PORT)
 
 fastify.listen({ port: PORT, host: '0.0.0.0' }, (err) => {
   if (err) throw err
-  console.log(`server listening on ${PORT}`)
+  console.info(`server listening on ${PORT}`)
 })

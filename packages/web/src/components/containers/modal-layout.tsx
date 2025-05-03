@@ -10,10 +10,7 @@ function ModalLayout() {
   const close = () => {
     dispatch(closeModal())
   }
-  useEffect(() => {
-    console.log('hellloooooo')
-    console.log({ isOpen, title, bodyContent, response })
-  }, [isOpen, title, bodyContent, response])
+  useEffect(() => {}, [isOpen, title, bodyContent, response])
 
   return (
     <>
